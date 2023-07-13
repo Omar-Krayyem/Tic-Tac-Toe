@@ -68,3 +68,122 @@ if(player1.score == 0 && player2.score == 0){
     turn = true;
 }
 checkTurn();
+
+for(let i = 0; i <9; i++){
+    cells[i].addEventListener('click',() =>{
+        if(isEmpty(i)){
+            if(turn){
+                addSymbol(player1, i);
+                turn = false;
+                checkWin(player1);
+                checkTurn();
+            }
+            else{
+                addSymbol(player2, i);
+                turn = true;
+                checkWin(player2);
+                checkTurn();
+            }
+        }
+        else{
+            alert("choose an empty cell");
+        }
+    })
+}
+
+function addSymbol(player, i){
+    cells[i].innerHTML = player.symbol;
+    player.played.push(i);
+    usedCells.push(i);
+}
+
+function checkWin(player){
+    if(!winner){
+        winCombo.some(combo =>{
+            if(combo.every(index => player.played.includes(index))){
+                if(player.title === "player1"){
+                    turn = true;
+                }
+                else{
+                    turn = false;
+                }
+                winner = true;
+                player.score++;
+                showScore();
+                setTimeout(winnigMessage, 500, player);
+                reset();
+            }
+        })
+    }
+ 
+    if(!winner && usedCells.length == 9){
+        ties++;
+        showScore();
+        setTimeout(drawMessage, 500);
+        turn = true;
+        reset();
+    }
+}
+
+function isEmpty(i){
+    if(usedCells.includes(i)){
+        return false;
+    }
+    return true;
+}
+
+function reset(){
+    winner = false;
+    player1.played = [];
+    player2.played = [];
+    checkTurn();
+    cells.forEach(cell => {
+        cell.innerHTML = '';
+    });
+    // usedCells = [];
+    usedCells.length = 0;
+}
+
+function resetBtn(){
+    winner = false;
+    turn = true;
+    player1.played = [];
+    player2.played = [];
+    checkTurn();
+    cells.forEach(cell => {
+        cell.innerHTML = '';
+    });
+    // usedCells = [];
+    usedCells.length = 0;
+}
+
+resetbtn.addEventListener('click', resetBtn);
+
+function checkTurn(){
+    if(turn){
+        currentTurn.innerHTML = player1.symbol;
+    }
+    else{
+        currentTurn.innerHTML = player2.symbol;
+    }
+}
+
+function showScore(){
+    player1Score.innerHTML = player1.score;
+    player2Score.innerHTML = player2.score;
+    draw.innerHTML = ties;  
+}
+
+close.addEventListener('click', function(){
+    overlay.style.display = "none";
+})
+
+function winnigMessage(player){
+    overlay.style.display = "flex";
+    messageContent.innerHTML = player.player_name + " is the <h2>winner<h2>";
+}
+
+function drawMessage (){
+    overlay.style.display = "flex";
+    messageContent.innerHTML = "<h2>Draw<h2>";
+}
