@@ -1,12 +1,94 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+    integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"/>
     <link href="src/main.css" rel="stylesheet">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tic Tac Toe</title>
 </head>
 <body>
+    <div class="overlay">
+        <div class="message">
+            <id class="close">
+                <i class="fa-solid fa-xmark" style="color: #DA1212;"></i>
+            </id>
+            <div class="content">X is the <h2>Winner</h2></div>
+        </div>
+    </div>
+
+    <div class="intro-container">
+        <h1>Tic Tac Toe Game</h1>
+        <form>
+            <div class="player-container">
+                <label for="player1s">Player One</label>
+                <input id="player1Name" name="player1" type="text" placeholder="Enter name of player oner">
+            </div>
+            <h2>VS</h2>
+            <div class="player-container">
+                <label for="player2">Player Two</label>
+                <input id="player2Name" type="text" name="player2" placeholder="Enter name of player two">
+            </div>
+        </form>
+        <button class="btnStart">Start Game</button>
+    </div>
+    
+    <div class="container">
+        <div class="tools">
+            <div class="symbols">
+                <i class="fa-solid fa-xmark" style="color: red;"></i>
+                <i class="fa-sharp fa-solid fa-o" style="color: blue;"></i>
+            </div>
+            <div class="turn">
+                <span class="current-turn"></span> turn
+            </div>
+            <div class="reset">
+                <div class="button">
+                    <i class="fa-solid fa-arrow-rotate-right" style="color: #164B60;"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="board">
+            <div class="cells">
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+            </div>
+            <div class="cells">
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+            </div>
+            <div class="cells">
+                <div class="cell"></div>
+                <div class="cell"></div>
+                <div class="cell"></div>
+            </div>
+        </div>
+
+        <div class="status">
+            <div class="player">
+                <span id="player1Label">player 1</span>
+                <span class="score1">0</span>
+            </div>
+
+            <div class="player">
+                <label>Draw</label>
+                <span class="draw">0</span>
+            </div>
+
+            <div class="player">
+                <span id="player2Label">player 2</span>
+                <span class="score2">0</span>
+            </div>
+        </div>
+    </div>
     <script src="src/main.js"></script>
 </body>
 </html>
